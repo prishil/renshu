@@ -1,0 +1,160 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{xsim}
+\xsimsetup{solution/print = true}
+\usepackage{titling}
+\usepackage{fullpage, amsfonts, amsmath, mdframed}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+\usepackage{algorithmic}
+\usepackage[ruled,vlined,commentsnumbered,titlenotnumbered]{algorithm2e}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+}
+\usepackage{graphicx}
+
+\title{CS 161 Homework 1 Solutions}
+%\preauthor{}
+%\postauthor{}
+\author{Prishil Patel}
+\date{July 3, 2019}
+
+\begin{document}
+\maketitle
+
+% set-up
+\begin{exercise}[subtitle={Set-up (2 pts)}]
+\begin{enumerate}[(a)]
+\item Please do the following, if you haven't already, then answer ``I did the things'' for part (a).
+	\begin{itemize}
+	\item Read the syllabus (at least up to the ``Resources'' section).
+	\item Join the course Piazza and Gradescope (hint: links are in the syllabus).
+	\end{itemize}
+\item Set up Jupyter notebooks and make sure you can get \texttt{lecture1\_karatsuba.ipynb} up and running:
+	\begin{itemize}
+	\item Go to \href{http://jupyter.org}{jupyter.org} and choose either ``Try it in your browser'' or ``Install the Notebook''. Follow the instructions.
+	\item Get the files \texttt{multHelpers.py} and \texttt{lecture1\_karatsuba.ipynb} from Canvas (``Files'' tab, in Lecture Materials\textgreater Lecture 01) and run \texttt{lecture1\_karatsuba.ipynb} in the Jupyter Notebook.
+		\begin{itemize}
+		\item If you are using the Notebook in your browser, you can upload the files by using File\textgreater Open... and then clicking Upload.
+		\item If you are installing the Notebook, you should install Python 3.3 or higher, and you may need to install matplotlib separately if you do not go through Anaconda to install Python.
+		\end{itemize}
+	\item In lecture, we briefly mentioned that the Toom-Cook multiplication algorithm runs in time $O(n^{1.465})$. Find the cell where we compare the running time of grade-school multiplication to "Magic Multiplication" (Karatsuba). Add the following line, then re-run the cell to generate the new plot comparing Toom-Cook to the multiplication algorithms from class, and include a screenshot of it as your answer for part (b)!
+	
+	\begin{flushright}
+	\texttt{plt.plot(nValsTmp, [ n**(1.465)/10 + 100 for n in nValsTmp],~"--",~color="blue", label="Toom-Cook Algorithm by hand")}
+	\end{flushright}
+	\end{itemize}
+\end{enumerate}
+\end{exercise}
+\begin{solution}
+	\begin{mdframed}
+	\begin{enumerate}[(a)]
+	\item 
+	\item %\includegraphics[scale=.5]{your_graph_filename}
+	\end{enumerate}
+	\end{mdframed}
+\end{solution}
+
+% basic big-O
+\begin{exercise}[subtitle={Basic Big-O (4 pts)}]
+Using the definitions of $O(\cdot),\Omega(\cdot),$ and $\Theta(\cdot)$, formally prove the following statements:
+\begin{enumerate}[(a)]
+	\item $5 \sqrt{n} + 3 = O(\sqrt{n})$.
+	\item $n^{100} = \Omega(n)$.
+	\item $2^{100} = \Theta(1)$.
+	\item $4^n$ is \textbf{not} $O(2^n)$.
+\end{enumerate}
+\end{exercise}
+\begin{solution}
+	\begin{mdframed}
+	\begin{enumerate}[(a)]
+	\item 
+	\end{enumerate}
+	\end{mdframed}
+\end{solution}
+
+% advanced big-O
+\begin{exercise}[subtitle={More Big-O: True or False? (8 pts)}]
+In the following, suppose that $f(n)$ and $g(n)$ are strictly positive, strictly increasing functions. Formally prove or disprove the following statements:
+\begin{enumerate}[(a)]
+\item If $f(n) = O(g(n))$ then $100 f^2(n) = O(g^2(n))$.
+\item There exists a constant $\alpha > 0$ such that $\log n = \Omega(n^{\alpha})$. (You may assume, if it helps, that $\log n = O(n)$ but $n$ is not $O(\log n)$.)
+\item If $f(n) = O(g(n))$ then $\log(f(n)) = O(\log(g(n)))$. (You may assume $\log(f(n)),\log(g(n)) > 0$.)
+\item If $f(n) = O(g(n))$ then $2^{f(n)} = O(2^{g(n)})$.
+\end{enumerate}
+\end{exercise}
+\begin{solution}
+	\begin{mdframed}
+	\begin{enumerate}[(a)]
+	\item 
+	\end{enumerate}
+	\end{mdframed}
+\end{solution}
+
+% recurrences
+\begin{exercise}[subtitle={Recurrence Relations (6 pts)}]
+Using either the Master Theorem or the ``tree'' method (show your work), give the best big-O bound possible on the following recurrences:
+\begin{enumerate}[(a)]
+\item $T(n) = 5T(\frac{n}{3}) + n$ with $T(n) = 1$ for $n<3$.
+\item $T(n) = 2T(\frac{n}{2}) + n^2$ with $T(n) = 1$ for $n<2$.
+\item $T(n) = T(n-2) + n$  with $T(n) = 1$ for $n<2$.
+\item $T(n) = 4T(\sqrt[4]{n}) + \log n$ with $T(n) = 1$ for $n<2$.
+\end{enumerate}
+\end{exercise}
+\begin{solution}
+	\begin{mdframed}
+	\begin{enumerate}[(a)]
+	\item 
+	\end{enumerate}
+	\end{mdframed}
+\end{solution}
+
+% Karatsuba
+\begin{exercise}[subtitle={Generalized Karatsuba (6 pts)}]
+In class, we saw that Karatsuba's Algorithm breaks up the problem of integer multiplication of two $n$-digit numbers into $3$ sub-problems of size $\frac{n}{2}$. We also mentioned that the Toom-Cook Algorithm breaks up integer multiplication into $5$ sub-problems of size $\frac{n}{3}$.
+
+Suppose that, for any integer $k \geq 2$, we can break up one integer multiplication $xy$ into $2k-1$ sub-problems of size $\frac{n}{k}$ in time $O(n)$. Furthermore, suppose that by simple addition and subtraction of the correct sub-problems, we can calculate $\frac{2n}{k}$-digit numbers $q_0,\dots,q_{2k-2}$ such that $xy = q_{2k-2} 10^{(2k-2)n/k} + \cdots + q_2 10^{2n/k} + q_{1} 10^{n/k} + q_0 10^{0}$.
+\begin{enumerate}[(a)]
+\item Argue that, for any constant $k$, the number of one-digit operations required to reassemble the sub-problems into the overall product $xy$ is $O(n)$.
+\item Give a recurrence relation representing the run-time of this generalized-Karatsuba algorithm for arbitrary $k$, and solve the recurrence relation to give the tightest-possible big-O bound.
+\item Your friend, Ms. Take, is very excited about this problem and tells you she's come up with an $O(n \log n)$ algorithm for integer multiplication---the fastest ever discovered! Here is her reasoning:
+	\begin{enumerate}[i.]
+	\item We know that for any $k$, we can break up an $n$-digit multiplication into $2k-1$ sub-problems of size $\frac{n}{k}$.
+	\item You showed in part (a) that recombining these sub-problems takes $O(n)$ time.
+	\item Therefore, just let $k=\sqrt{n}$. This gives us the recurrence relation $T(n) = (2\sqrt{n}-1)T(\sqrt{n}) + O(n)$.
+	\item This recurrence solves to $O(n \log n)$. First, notice that there are $\log \log n$ levels of the recursion tree, because that's how many times you have to take the square root of $n$ to get down to $O(1)$. At the 0th level, there is 1 sub-problem of size $n$. At the 1st level, there are fewer than $2 \sqrt{n}$ sub-problems of size $\sqrt{n}$. At the 2nd level, there are fewer than $2 \sqrt{n} \times 2 n^{1/4} = 4 n^{3/4}$ sub-problems of size $n^{1/4}$. In general, at the $t$'th level, there are fewer than $2^{t} n^{1 - \frac{1}{2^t}}$ sub-problems of size $n^{1/2^t}$, for a total of $2^t O(n)$ work at level $t$. Finally, observe that $\sum_{t=0}^{\log \log n} 2^t O(n) = O(2^{\log\log n} n) = O( n\log n)$, as claimed!
+	\end{enumerate}
+What big conceptual error has Ms. Take made?
+\end{enumerate}
+\end{exercise}
+\begin{solution}
+	\begin{mdframed}
+	\begin{enumerate}[(a)]
+	\item 
+	\end{enumerate}
+	\end{mdframed}
+\end{solution}
+
+% selection
+\begin{exercise}[subtitle={Preview of Selection} (6 pts)]
+In lecture 03 we will discuss the selection problem: given an unsorted list of $n$ elements and an integer $k$, return the $k$'th smallest element---i.e., when $k=1$ return the min, when $k=n$ return the max, etc.
+
+In this problem, we are instead given two \textbf{sorted} lists, each of length $n$; assume that all the elements are distinct. Give a divide-and-conquer algorithm that returns the $k$'th smallest element in the union of the two lists, in time $O(\log n)$. Provide an informal argument that your algorithm has the correct runtime, and a concise proof by induction that your algorithm returns the correct answer.
+\end{exercise}
+\begin{solution}
+	\begin{mdframed}
+	%\noindent\begin{minipage}{\linewidth}
+    %\begin{algorithm}[H]
+    %n = len(input)\\
+    %\If{n = 1}{
+    %    return 0
+    %}
+    %\caption{\textsc{ExamplePseudoCode}(input)}
+    %\end{algorithm}
+    %\end{minipage}
+	\end{mdframed}
+\end{solution}
+
+
+\end{document}
